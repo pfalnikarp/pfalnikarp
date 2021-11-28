@@ -60,18 +60,20 @@ class ContactformController extends Controller
     public function create()
     {
 
-        $todaydate =   Carbon::now('Asia/Kolkata')->format('d/m/Y');
+        $todaydate =   Carbon::now('Asia/Kolkata');
 
         $hr = array();
 
          for ($i=1; $i < 13; $i++) { 
-             array_push($hr, $i);
+              $var = str_pad($i, 2, '0', STR_PAD_LEFT);
+             array_push($hr, $var);
          }
 
          $minute = array();
 
          for ($i=1; $i < 61; $i++) { 
-             array_push($minute, $i);
+                 $var = str_pad($i, 2, '0', STR_PAD_LEFT);
+             array_push($minute, $var);
          }
         return view('contactform.create'  ,  compact('todaydate', 'hr' , 'minute'));
     }
@@ -84,7 +86,36 @@ class ContactformController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $this->validate($request, [
+            'entry_date'=> 'required|date',
+        'subject' => 'required',
+         'message'=>'required',
+          'pic1'=>'required',
+          'ampm'=>'required',
+          'hour'=> 'required',
+          'minute' => 'required'
+      ]);
+
+          $input =  $request->all();
+
+            
+
+          $entry_date =  Carbon::createFromFormat('m/d/Y',  $request->entry_date,  'Asia/Kolkata')->format('Y-m-d');
+         
+           $time =    $request->hour  .':'. $request->minute  . ' ' . $request->ampm;
+
+          // dd($time);
+           $new_entry_time  = date('h:i', strtotime($time));  
+
+         // $create_time =   $entry_date . ' 'd . $request->hour  .' '. $request->minute .' '. $request->ampm ;
+
+        //  dd($create_time);
+
+         
+
+         dd($entry_date . $new_entry_time);
+          dd($input);
+
     }
 
     /**

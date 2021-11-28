@@ -54,7 +54,7 @@
 
 
 {!! Form::open(['route'=>'contactform.store', 'id'=>'tiago',  'enctype'=> 'multipart/form-data' ]) !!}
-
+@csrf
 <div class="row">
   
   <div class = "col-md-5 panel block panel-primary">
@@ -159,6 +159,8 @@
 
 <script type="text/javascript">
     
+
+$("#entry_date").datepicker( {dateFormat: 'yy-mm-dd'});
 
 $(document).ready(function ($) {
 
