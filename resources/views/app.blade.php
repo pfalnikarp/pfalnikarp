@@ -18,7 +18,13 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        @inertia
+       
+        <nav>
+            <ul>
+                <li><a href="/contactform/create">Contact Form</a></li>
+            </ul>
+        </nav>
+         @inertia
 
         @env ('local')
             <script src="http://localhost:8080/js/bundle.js"></script>
